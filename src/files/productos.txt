@@ -1,0 +1,29 @@
+[
+  {
+    "titulo": "Ender 3 Max",
+    "precio": 42000,
+    "marca": "Creallyti",
+    "tipo": "Impresora FDM",
+    "codigo": "C003",
+    "imagen": "http://localhost:8080//imagenes/1638553648607Ender-3-Max-izq.png",
+    "id": "OpcK"
+  },
+  {
+    "titulo": "Ender 3 Max pro",
+    "precio": "45400",
+    "marca": "Creallyti",
+    "tipo": "Impresora FDM",
+    "codigo": "C004",
+    "id": "EEqa",
+    "imagen": "http://localhost:8080//imagenes/1638555214939Ender-3-Max-izq.png"
+  },
+  {
+    "titulo": "Ender 3 Max pro",
+    "precio": "46000",
+    "marca": "Creallyti",
+    "tipo": "Impresora FDM",
+    "codigo": "C004",
+    "id": "ajX3",
+    "imagen": "http://localhost:8080//imagenes/1638555286710Ender-3-Max-izq.png"
+  }
+]
