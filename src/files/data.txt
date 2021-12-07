@@ -1,0 +1,118 @@
+[
+  {
+    "titulo": "Creality Ender 3",
+    "precio": 33900,
+    "tipo": "Impresora FDM",
+    "marca": "Creality",
+    "dimensiones": "220x220x250mm",
+    "imagen": "http://localhost:8080//imagenes/16388138335584.jpg",
+    "id": "8cU7"
+  },
+  {
+    "titulo": "Creality Ender 3 Pro",
+    "precio": 41900,
+    "tipo": "Impresora FDM",
+    "marca": "Creality",
+    "dimensiones": "220x220x250mm",
+    "imagen": "http://localhost:8080//imagenes/16388146008411.jpg",
+    "id": "d2cZ"
+  },
+  {
+    "titulo": "Creality Ender 3 v2",
+    "precio": 49900,
+    "tipo": "Impresora FDM",
+    "marca": "Creality",
+    "dimensiones": "220x220x250mm",
+    "imagen": "http://localhost:8080//imagenes/1638814650725Captura ender3 v2.PNG",
+    "id": "XSNO"
+  },
+  {
+    "titulo": "Creality Ender 3 Max",
+    "precio": 63900,
+    "tipo": "Impresora FDM",
+    "marca": "Creality",
+    "dimensiones": "300x300x340mm",
+    "imagen": "http://localhost:8080//imagenes/16388148113463.jpg",
+    "id": "q2Dz"
+  },
+  {
+    "titulo": "Hellbot Magna 2 230",
+    "precio": 54900,
+    "tipo": "Impresora FDM",
+    "marca": "Hellbot",
+    "dimensiones": "230x230x250mm",
+    "imagen": "http://localhost:8080//imagenes/16388158620061.jpg",
+    "id": "JBLD"
+  },
+  {
+    "titulo": "Hellbot Magna 2 400",
+    "precio": 137390,
+    "tipo": "Impresora FDM",
+    "marca": "Hellbot",
+    "dimensiones": "400x400x400mm",
+    "imagen": "http://localhost:8080//imagenes/1638815923667Magna 2 400 frente filamento.png",
+    "id": "L0rL"
+  },
+  {
+    "titulo": "Hellbot Magna 2 500",
+    "precio": "163800",
+    "tipo": "Impresora FDM",
+    "marca": "Hellbot",
+    "dimensiones": "500x500x500mm",
+    "imagen": "http://localhost:8080//imagenes/1638817746177Magna 2 500 frente filamento.png"
+  },
+  {
+    "titulo": "Hellbot Magna 2 500",
+    "precio": 163900,
+    "marca": "Hellbot",
+    "tipo": "Impresora 3D FDM",
+    "stock": "10",
+    "codigo": "H005",
+    "imagen": "http://localhost:8080//imagenes/1638829626433Magna 2 500 frente filamento.png",
+    "id": "qXsi",
+    "timestamp": "19:27:06"
+  },
+  {
+    "titulo": "Creality Ender 5 Pro",
+    "precio": 67900,
+    "marca": "Creality",
+    "tipo": "Impresora 3D FDM",
+    "stock": "10",
+    "codigo": "C005",
+    "imagen": "http://localhost:8080//imagenes/16388297910031.jpg",
+    "id": "0QbY",
+    "timestamp": "19:29:51"
+  },
+  {
+    "titulo": "Creality Ender 5 Plus",
+    "precio": 116900,
+    "marca": "Creality",
+    "tipo": "Impresora 3D FDM",
+    "stock": "10",
+    "codigo": "C006",
+    "imagen": "http://localhost:8080//imagenes/16388298516602 ender 5 plus.PNG",
+    "id": "FWyL",
+    "timestamp": "19:30:51"
+  },
+  {
+    "titulo": "Creality Cr-200B",
+    "precio": 78900,
+    "marca": "Creality",
+    "tipo": "Impresora 3D FDM",
+    "stock": "10",
+    "codigo": "C008",
+    "imagen": "http://localhost:8080//imagenes/1638829967234Cr 200B derecha.png",
+    "id": "6aHA",
+    "timestamp": "19:32:47"
+  },
+  {
+    "id": "05GL",
+    "titulo": "Hellbot Hidra 220",
+    "precio": "84500",
+    "marca": "Hellbot",
+    "tipo": "Impresora 3D FDM",
+    "stock": "10",
+    "codigo": "H006",
+    "imagen": "http://localhost:8080//imagenes/1638833111277preventa UW-01.jpg"
+  }
+]

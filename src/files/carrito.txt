@@ -1,0 +1,33 @@
+[
+  {
+    "id": "PacH",
+    "timestamp": "19:48:31",
+    "usuario": {
+      "userName": "Estani"
+    },
+    "carrito": [
+      {
+        "titulo": "Creality Ender 5 Plus",
+        "precio": 116900,
+        "marca": "Creality",
+        "tipo": "Impresora 3D FDM",
+        "stock": "10",
+        "codigo": "C006",
+        "imagen": "http://localhost:8080//imagenes/16388298516602 ender 5 plus.PNG",
+        "id": "FWyL",
+        "timestamp": "19:30:51"
+      },
+      {
+        "titulo": "Creality Cr-200B",
+        "precio": 78900,
+        "marca": "Creality",
+        "tipo": "Impresora 3D FDM",
+        "stock": "10",
+        "codigo": "C008",
+        "imagen": "http://localhost:8080//imagenes/1638829967234Cr 200B derecha.png",
+        "id": "6aHA",
+        "timestamp": "19:32:47"
+      }
+    ]
+  }
+]

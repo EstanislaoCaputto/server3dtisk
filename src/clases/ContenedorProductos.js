@@ -2,7 +2,7 @@ import fs from 'fs';
 import crearId from '../utilidades/utilidades.js';
 import __dirname from '../utils.js';
 
-const prodURL = __dirname+'/files/productos.txt';
+const prodURL = __dirname+'/files/data.txt';
 
 
 class Contenedor{
@@ -15,6 +15,9 @@ class Contenedor{
             let productoParseado = JSON.parse(misDatos);
             let id = crearId(4);
             producto.id = id;
+            let timestamp = Date.now();
+            let time = new Date(timestamp)
+            producto.timestamp = time.toTimeString().split(" ")[0]
             productoParseado.push(producto);
             await fs.promises.writeFile(prodURL,JSON.stringify(productoParseado,null,2));
             console.log(`${producto.titulo} guardado con exito con el id: ${producto.id}`);
@@ -22,6 +25,9 @@ class Contenedor{
             
         }catch{
             let id = crearId(4)
+            let timestamp = Date.now();
+            let time = new Date(timestamp)
+            producto.timestamp = time.toTimeString().split(" ")[0]
             producto.id = id
             try {
                 await fs.promises.writeFile(prodURL, JSON.stringify([producto],null,2));
@@ -36,7 +42,7 @@ class Contenedor{
         try {
             let misDatos = await fs.promises.readFile(prodURL, 'utf-8');
             let productos = JSON.parse(misDatos);
-            return{status:'Exito', usuario:{admin:true,client:true}, objetos:productos}
+            return{status:'Exito', objetos:productos}
         } catch{
             return{status:'Error', message:'Error al mostrar los productos'}
         };
@@ -47,7 +53,7 @@ class Contenedor{
             let productos = JSON.parse(misDatos);
             let elProducto = productos.find(p=>p.id===id);
             if(elProducto){
-                return{status:'Exito!',usuario:{admin:true,client:true}, objeto:elProducto}
+                return{status:'Exito!', objeto:elProducto}
             }else{
                 return{status:'Error', message:`El producto con el id: ${id} de momento no ta :S`}
             };
@@ -55,14 +61,21 @@ class Contenedor{
             return{status:'Error', message:`Error al buscar el producto`}
         };
     };
-    async editarPorID(producto){
+    async editarPorID(id, producto){
         try {
             let misDatos = await fs.promises.readFile(prodURL, 'utf-8');
             let productos = JSON.parse(misDatos);
-            let filtrarP = productos.filter(p=>p.id!==producto.id)
-            filtrarP.push(producto)
+            let prod = productos.map(impresora=>{
+                if(impresora.id===id){
+                    producto = Object.assign({id:impresora.id,...producto})
+                    return producto
+                }else{
+                    return impresora
+                }
+            })
+            
             try {
-                await fs.promises.writeFile(prodURL, JSON.stringify(filtrarP, null, 2))
+                await fs.promises.writeFile(prodURL, JSON.stringify(prod, null, 2))
             } catch{
                 
                 return {status:'Error', message:'No se pudo editar el producto con el ID indicado'}

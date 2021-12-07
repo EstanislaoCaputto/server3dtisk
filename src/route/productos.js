@@ -33,25 +33,25 @@ routerProducto.post('/', upload.single('image'), (req,res)=>{ //Agrega un nuevo 
         })
 
     }else{
-        res.send(console.log({status:'Error', message:'Solo el admin tiene autorizacion'}))
+        res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
     }
 })
 //PUT
-routerProducto.put('/',upload.single('image'),(req,res)=>{
+routerProducto.put('/:id',upload.single('image'),(req,res)=>{ //recibo es producto editado y con el id borro el prod viejo
     if(req.auth){
+        let id = req.params.id
         let file = req.file;
         let producto = req.body
-        console.log(producto);
         producto.imagen = req.protocol+'://'+req.hostname+':8080/'+'/imagenes/'+file.filename;
         try {
-            productos.editarPorID(producto)
+            productos.editarPorID(id,producto)
             res.send({status:'Exito!', message:'Producto editado con éxito'})
         } catch{
             return({status:'Error', message:'Error al editar el producto compruebe el ID'})        
         }
 
     }else{
-        res.send(console.log({status:'Error', message:'Solo el admi esta autorizado'}))
+        res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
     }
 })
 
@@ -64,7 +64,7 @@ routerProducto.delete('/:pid',(req,res)=>{
         })
 
     }else{
-        res.send(console.log({status:'Error', message:'Solo el admin esta autorizado'}))
+        res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
     }
 })
 
