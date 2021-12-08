@@ -31,8 +31,11 @@ app.use((req,res,next)=>{
 app.use('/api/productos', prodRouter);
 app.use('/api/carrito', routerCarrito);
 
-// app.get(rutasProhibidas ,(req,res)=>{
-//     res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
-// })
+app.get('/' ,(req,res)=>{
+    res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
+})
+app.post('/' ,(req,res)=>{
+    res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
+})
 
 
