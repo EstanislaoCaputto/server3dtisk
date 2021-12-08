@@ -1,12 +1,13 @@
 [
   {
+    "id": "8cU7",
+    "descripcion": "esto es una prueba para pechar la descripcion",
     "titulo": "Creality Ender 3",
     "precio": 33900,
     "tipo": "Impresora FDM",
     "marca": "Creality",
     "dimensiones": "220x220x250mm",
-    "imagen": "http://localhost:8080//imagenes/16388138335584.jpg",
-    "id": "8cU7"
+    "imagen": "http://localhost:8080//imagenes/16388138335584.jpg"
   },
   {
     "titulo": "Creality Ender 3 Pro",

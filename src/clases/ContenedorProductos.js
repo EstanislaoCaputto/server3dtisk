@@ -67,8 +67,8 @@ class Contenedor{
             let productos = JSON.parse(misDatos);
             let prod = productos.map(impresora=>{
                 if(impresora.id===id){
-                    producto = Object.assign({id:impresora.id,...producto})
-                    return producto
+                    impresora = Object.assign({id:impresora.id, ...producto, ...impresora})
+                    return impresora
                 }else{
                     return impresora
                 }

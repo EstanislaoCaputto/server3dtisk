@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, ()=>console.log(`Servidor escuchando en el puerto: ${PORT}`));
 const prodRouter = routerProducto;
-const admin = false; //Cambiar la variable a true para las peticiones POST, PUT y DELETE
+const admin = true; //Cambiar la variable a true para las peticiones POST, PUT y DELETE
 
 
 app.use(express.json());

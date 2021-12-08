@@ -42,7 +42,9 @@ routerProducto.put('/:id',upload.single('image'),(req,res)=>{ //recibo es produc
         let id = req.params.id
         let file = req.file;
         let producto = req.body
-        producto.imagen = req.protocol+'://'+req.hostname+':8080/'+'/imagenes/'+file.filename;
+        console.log(producto);
+        console.log(id);
+        if(file)producto.imagen = req.protocol+'://'+req.hostname+':8080/'+'/imagenes/'+file.filename;
         try {
             productos.editarPorID(id,producto)
             res.send({status:'Exito!', message:'Producto editado con éxito'})
