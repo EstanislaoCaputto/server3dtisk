@@ -1,35 +1,32 @@
 import express from "express";
 import upload from "../services/uploader.js";
 import Contenedor from "../clases/ContenedorProductos.js";
+import ProductosDB from "../services/Productos.js";
 
 
 const routerProducto = express.Router();
 const productos = new Contenedor();
+const prodService = new ProductosDB();
 
 //GET
 routerProducto.get('/',(req,res)=>{
-    productos.obtenerProductos().then(resultado=>{
-        res.send(resultado);
+    prodService.verTodosProductos().then(resultado=>{
+        res.send(resultado)
     })
 })
 routerProducto.get('/:pid',(req,res)=>{
     let id = req.params.pid;
-    productos.obtenerPorID(id).then(resultado=>{
-        res.send(resultado)
+    prodService.productoPorId(id).then(resultado=>{
+        res.send(resultado.payload)
     })
 })
 
 //POST
-routerProducto.post('/', upload.single('image'), (req,res)=>{ //Agrega un nuevo producto
+routerProducto.post('/', (req,res)=>{
     if(req.auth){
-        let file = req.file
         let producto = req.body;
-        console.log(file);
-        producto.precio = parseInt(producto.precio)
-        producto.imagen = req.protocol+'://'+req.hostname+':8080/'+'/imagenes/'+file.filename;
-        productos.guardarProducto(producto).then(result=>{
+        prodService.crearProducto(producto).then(result=>{
             res.send(result)
-            
         })
 
     }else{
@@ -40,13 +37,9 @@ routerProducto.post('/', upload.single('image'), (req,res)=>{ //Agrega un nuevo 
 routerProducto.put('/:id',upload.single('image'),(req,res)=>{ //recibo es producto editado y con el id borro el prod viejo
     if(req.auth){
         let id = req.params.id
-        let file = req.file;
-        let producto = req.body
-        console.log(producto);
-        console.log(id);
-        if(file)producto.imagen = req.protocol+'://'+req.hostname+':8080/'+'/imagenes/'+file.filename;
+        let producto = req.body       
         try {
-            productos.editarPorID(id,producto)
+            prodService.editarProductoPorId(id, producto)
             res.send({status:'Exito!', message:'Producto editado con éxito'})
         } catch{
             return({status:'Error', message:'Error al editar el producto compruebe el ID'})        
@@ -58,15 +51,14 @@ routerProducto.put('/:id',upload.single('image'),(req,res)=>{ //recibo es produc
 })
 
 //DELETE
-routerProducto.delete('/:pid',(req,res)=>{
-    if(req.auth){
-        let id = req.params.pid;
-        productos.eliminarPorID(id).then(resultado=>{
+routerProducto.delete('/:id',(req,res)=>{
+    let id = req.params.id
+    try {
+        prodService.eliminarProductoPorId(id).then(resultado=>{
             res.send(resultado)
         })
-
-    }else{
-        res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
+    } catch (error) {
+        return{status:'Error', message:'No se pudo borrar el producto'}
     }
 })
 
