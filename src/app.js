@@ -55,18 +55,20 @@ app.get('/', (req,res)=>{
 //SOCKET para crear el chat
 
 io.on('connection', async socket=>{
-    
     console.log(`El socket ${socket.id} se ha conectado`);
+    let mensjEmit = await mensajes.verMensajes().then(resul=>{
+        return resul
+    })
+    io.emit('mensajeLog', mensjEmit.message);
+
     socket.on('mensj', async dato=>{
+        o.emit('mensajeLog', mensjEmit.message);
         await mensajes.crearRegistro(dato).then(resultado=>{
             console.log(resultado);
         })
-        let mensjEmit = await mensajes.verMensajes().then(resul=>{
-            return resul
-        });
-        console.log(mensjEmit);
-        io.emit('mensajeLog', mensjEmit);
     })
+    
+
 })
 
 

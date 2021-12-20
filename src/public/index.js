@@ -7,9 +7,13 @@ input.addEventListener('keyup', (e)=>{
         socket.emit('mensj', {usuario:user.value, mensajes:e.target.value})
     }
 })
-socket.on('mensajeLog', data =>{
-    console.log(data);
-    let p = document.getElementById('log');
-    let todosMensj = `<p>${data.usuario} dice: ${data.mensajes}</p>`
-    p.innerHTML = todosMensj
+
+socket.on('mensajeLog', mensaje=>{
+    console.log(mensaje);
+    let div = document.getElementById('container-chat');
+    let todosMensj = mensaje.map(chat=>{
+        return `<p>${chat.usuario} dice: ${chat.mensajes}</p>`
+    })
+    div.innerHTML = todosMensj
+
 })

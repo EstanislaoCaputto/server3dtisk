@@ -3,21 +3,7 @@ import __dirname from './utils.js'
 
 export const sqlite = knex({
     client: "sqlite3",
-    connection:{filename:__dirname+'/db/basedatos.sqlite'}
-})
-
-sqlite.schema.hasTable('Chat').then(resultado=>{
-  if(!resultado){
-      sqlite.schema.createTable('Chat', table=>{
-          table.increments();
-          table.string('usuario').notNullable();
-          table.string('mensajes').notNullable();
-          table.timestamps(true,true);
-      })
-      return(console.log("Tabla de Chat creada"))
-  }else{
-      return(console.log("ya esta la tabla"))
-  }
+    connection: { filename: __dirname + '/db/basedatos.sqlite' }
 })
 
 export const mariadb = knex({
