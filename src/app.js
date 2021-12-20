@@ -59,10 +59,10 @@ io.on('connection', async socket=>{
     let mensjEmit = await mensajes.verMensajes().then(resul=>{
         return resul
     })
-    io.emit('mensajeLog', mensjEmit.message);
+    socket.emit('mensajeLog', mensjEmit.message);
 
     socket.on('mensj', async dato=>{
-        o.emit('mensajeLog', mensjEmit.message);
+        io.emit('mensajeLog', mensjEmit.message);
         await mensajes.crearRegistro(dato).then(resultado=>{
             console.log(resultado);
         })
