@@ -22,16 +22,14 @@ routerProducto.get('/:pid',(req,res)=>{
 })
 
 //POST
-routerProducto.post('/', (req,res)=>{
-    if(req.auth){
-        let producto = req.body;
-        prodService.crearProducto(producto).then(result=>{
-            res.send(result)
-        })
+routerProducto.post('/', (req, res) => {
 
-    }else{
-        res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
-    }
+    let producto = req.body;
+    prodService.crearProducto(producto).then(result => {
+        res.send(result)
+    })
+    // res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
+
 })
 //PUT
 routerProducto.put('/:id',upload.single('image'),(req,res)=>{ //recibo es producto editado y con el id borro el prod viejo

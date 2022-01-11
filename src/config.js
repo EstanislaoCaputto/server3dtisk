@@ -14,7 +14,7 @@ export const mariadb = knex({
       port: 3306,
       user: 'root',
       password:'',
-      database: 'mibase'
+      database: 'data-base-3dtisk'
     },
     pool:{min: 0, max:10}
 })
