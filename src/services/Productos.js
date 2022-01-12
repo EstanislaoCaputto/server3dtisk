@@ -2,9 +2,9 @@ import {mariadb} from "../config.js";
 
 class ProductosDB {
     constructor(){
-        mariadb.schema.hasTable('productos').then(resultado=>{
+        mariadb.schema.hasTable('productosactualizado').then(resultado=>{
             if(!resultado){
-                mariadb.schema.createTable('productos', table=>{
+                mariadb.schema.createTable('productosactualizado', table=>{
                     table.increments();
                     table.string('Nombre').notNullable();
                     table.string('Categorías').notNullable().defaultTo('sin Marca');
@@ -27,7 +27,7 @@ class ProductosDB {
     }
     crearProducto = async (producto) => {
         try {
-            let prodID = await mariadb.table('productos').insert(producto);
+            let prodID = await mariadb.table('productosactualizado').insert(producto);
             return{status:'Exito!', message:`Producto agregado con el ID: ${prodID}`}
         } catch (error) {
             return{status:'Error', message:'No se pudo crear el producto', error:error}
@@ -35,7 +35,7 @@ class ProductosDB {
     }
     verTodosProductos = async () => {
         try {
-            let losProductos = await mariadb.select().table('productos');
+            let losProductos = await mariadb.select().table('productosactualizado');
             return{status:'Exito', payload:losProductos}
         } catch (error) {
             return {status:'Error', message:'Algo salio mal'}
@@ -43,7 +43,7 @@ class ProductosDB {
     }
     productoPorId = async (id) =>{
         try {
-            let prod = await mariadb.select().table('productos').where('id', id).first();
+            let prod = await mariadb.select().table('productosactualizado').where('id', id).first();
             if (prod) {
                 return{status:'Exito!', payload:prod}
             } else {
@@ -55,7 +55,7 @@ class ProductosDB {
     }
     editarProductoPorId = async (id,producto) =>{
         try {
-            let prod = await mariadb.select().table('productos').where('id', id).first().update(producto);
+            let prod = await mariadb.select().table('productosactualizado').where('id', id).first().update(producto);
             if (prod) {
                 return{status:'Exito', payload:`Producto editado con éxito, ${prod}`}
             } else {
@@ -67,7 +67,7 @@ class ProductosDB {
     }
     eliminarProductoPorId = async (id) =>{
         try {
-            await mariadb.select().table('productos').where('id',id).first().del();
+            await mariadb.select().table('productosactualizado').where('id',id).first().del();
             return {status:'Exito!', message:'Producto eliminado'}
         } catch (error) {
             return {status:'Error', message:'Algo salio mal'}
