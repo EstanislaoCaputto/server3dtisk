@@ -52,6 +52,11 @@ app.get('/', (req,res)=>{
     })
 })
 
+app.get('/info', (req,res)=>{
+    res.send({Puerto:PORT})
+})
+
+
 //SOCKET para crear el chat
 
 io.on('connection', async socket=>{
