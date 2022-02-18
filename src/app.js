@@ -6,7 +6,6 @@ import cors from 'cors'
 import ProductosDB from "./services/Productos.js";
 import Chat from "./services/Chat.js";
 import { Server } from "socket.io";
-import { sqlite } from "./config.js";
 
 
 const app = express();
