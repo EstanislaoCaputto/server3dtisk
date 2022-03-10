@@ -10,8 +10,9 @@ export default class Usuarios{
                     table.string('Apellido').notNullable();
                     table.string('Mail').notNullable();
                     table.integer('Edad');
-                    table.integer('Telefono').notNullable()
+                    table.integer('Telefono').notNullable();
                     table.string('Imagen');
+                    table.string('Contraseña').notNullable();
                     table.timestamps(true,true);
                 })
                 return{message:'Tabla usuario creada'}

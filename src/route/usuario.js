@@ -21,6 +21,8 @@ routerUsuario.get('/:uid', (req,res)=>{
 //POST
 routerUsuario.post('/', (req,res)=>{
     let usuario = req.body;
+    delete usuario['Contraseña']
+    console.log(usuario);
     userService.crearUsuario(usuario)
     .then(resultado=>{
         res.send(resultado)
