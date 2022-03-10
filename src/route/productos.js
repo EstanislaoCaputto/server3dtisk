@@ -1,11 +1,9 @@
 import express from "express";
 import upload from "../services/uploader.js";
-import Contenedor from "../clases/ContenedorProductos.js";
 import ProductosDB from "../services/Productos.js";
 
 
 const routerProducto = express.Router();
-const productos = new Contenedor();
 const prodService = new ProductosDB();
 
 //GET

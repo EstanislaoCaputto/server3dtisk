@@ -1,4 +1,4 @@
-import fs from 'fs';
+import mariadb from '../config.js';
 import __dirname from '../utils.js';
 import crearId from '../utilidades/utilidades.js';
 
@@ -11,14 +11,14 @@ class Carrito{
     };
     async agregarAlCarro(producto, user){
         try {
-            let miCarrito = await fs.promises.readFile(carritoURL, 'utf-8');
+            let miCarrito = await mariadb.promises.readFile(carritoURL, 'utf-8');
             let carroParseado = JSON.parse(miCarrito);
             let idCompra = crearId(4)
             let timestamp = Date.now();
             let time = new Date(timestamp)
             
             carroParseado.push({id:idCompra,timestamp:time.toTimeString().split(" ")[0],usuario:user,carrito:[producto.compra]})       
-            await fs.promises.writeFile(carritoURL,JSON.stringify(carroParseado,null,2))
+            await mariadb.promises.writeFile(carritoURL,JSON.stringify(carroParseado,null,2))
             return{status:'Exito!', message:'Compra agregada al Carrito con éxito', id:`el ID de su compra es ${idCompra}`}
 
         } catch{
@@ -28,7 +28,7 @@ class Carrito{
                 let timestamp = Date.now();
                 let time = new Date(timestamp)
                 compra.push({id:idCompra,timestamp:time.toTimeString().split(" ")[0], usuario:user, carrito:[producto.compra]})
-                await fs.promises.writeFile(carritoURL,JSON.stringify(compra,null,2))
+                await mariadb.promises.writeFile(carritoURL,JSON.stringify(compra,null,2))
                 return{status:'Exito!', message:'Tu primera compra agregada al Carrito con éxito', id:`el ID de su compra es ${idCompra}`}
             } catch(error){
                 console.log(error);
@@ -37,11 +37,11 @@ class Carrito{
         }
     }
     async eliminarCompraPorId(id){
-        let misDatos = await fs.promises.readFile(carritoURL,'utf-8');
+        let misDatos = await mariadb.promises.readFile(carritoURL,'utf-8');
         let carroParseado = JSON.parse(misDatos);
         let compraBorrada = carroParseado.filter(c=>c.id!==id)
         try {
-            await fs.promises.writeFile(carritoURL,JSON.stringify(compraBorrada,null,2))
+            await mariadb.promises.writeFile(carritoURL,JSON.stringify(compraBorrada,null,2))
             return{status:'Exito!', message:'Compra borrada con éxito'}
         } catch (error) {
             return{status:'Error', message:'No se pudo borrar', error:error}
@@ -49,7 +49,7 @@ class Carrito{
 
     }
     async verCompraPorId(id){
-        let misDatos = await fs.promises.readFile(carritoURL,'utf-8');
+        let misDatos = await mariadb.promises.readFile(carritoURL,'utf-8');
         let carroParseado = JSON.parse(misDatos);
         let miCompra = carroParseado.find(c=>c.id===id)
         if(!miCompra){
@@ -60,7 +60,7 @@ class Carrito{
 
     }
     async agregarProductoAlCompra(id, producto){
-        let misDatos = await fs.promises.readFile(carritoURL, 'utf-8');
+        let misDatos = await mariadb.promises.readFile(carritoURL, 'utf-8');
         let carroParseado = JSON.parse(misDatos);
         try {
             let miCompra = carroParseado.find(c => c.id === id);
@@ -69,7 +69,7 @@ class Carrito{
             miCompra.carrito = objetos
             let NvaCompra = carroParseado.filter(c => c.id !== miCompra.id)  //borro la compra con su id y pusheo la compra con sus prod agregados
             NvaCompra.push(miCompra)
-            await fs.promises.writeFile(carritoURL,JSON.stringify(NvaCompra,null,2))
+            await mariadb.promises.writeFile(carritoURL,JSON.stringify(NvaCompra,null,2))
             return{status:'Exito!', message:'Producto agregado al carro'}
         } catch (error) {
             return{status:'Error', message:'Error al agregar el producto', error:error}
@@ -77,7 +77,7 @@ class Carrito{
 
     }
     async eliminarProductoDeCompra(idCompra,idProducto){
-        let misDatos = await fs.promises.readFile(carritoURL,'utf-8');
+        let misDatos = await mariadb.promises.readFile(carritoURL,'utf-8');
         let carroParseado = JSON.parse(misDatos);
         let miCompra = carroParseado.find(c=>c.id===idCompra)
         let objetos = [miCompra.compra]
@@ -86,7 +86,7 @@ class Carrito{
         let compraEditada = carroParseado.filter(c=>c.id!==idCompra)
         compraEditada.push(miCompra)
         try {
-            await fs.promises.writeFile(carritoURL, JSON.stringify(compraEditada,null,2))
+            await mariadb.promises.writeFile(carritoURL, JSON.stringify(compraEditada,null,2))
             return{status:'Exito!', message:'Producto eliminado del carrito'}
         } catch (error) {
             return{status:'Error', message:'No se pudo borrar el producto', error:error}

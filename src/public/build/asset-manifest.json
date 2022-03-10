@@ -1,0 +1,40 @@
+{
+  "files": {
+    "main.css": "/static/css/main.2b77f782.chunk.css",
+    "main.js": "/static/js/main.aa2f9087.chunk.js",
+    "main.js.map": "/static/js/main.aa2f9087.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.8733dc53.js",
+    "runtime-main.js.map": "/static/js/runtime-main.8733dc53.js.map",
+    "static/css/2.6d2ee6ba.chunk.css": "/static/css/2.6d2ee6ba.chunk.css",
+    "static/js/2.40c4b367.chunk.js": "/static/js/2.40c4b367.chunk.js",
+    "static/js/2.40c4b367.chunk.js.map": "/static/js/2.40c4b367.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/2.6d2ee6ba.chunk.css.map": "/static/css/2.6d2ee6ba.chunk.css.map",
+    "static/css/main.2b77f782.chunk.css.map": "/static/css/main.2b77f782.chunk.css.map",
+    "static/js/2.40c4b367.chunk.js.LICENSE.txt": "/static/js/2.40c4b367.chunk.js.LICENSE.txt",
+    "static/media/Cabecera.css": "/static/media/whatsapp.b1060677.svg",
+    "static/media/2091278_aa592ba15abbb0c38e70b745a8fed128.f8664d78.svg": "/static/media/2091278_aa592ba15abbb0c38e70b745a8fed128.f8664d78.svg",
+    "static/media/Bard.d725712e.stl": "/static/media/Bard.d725712e.stl",
+    "static/media/Flyer fil 3N3.41ceac80.jpg": "/static/media/Flyer fil 3N3.41ceac80.jpg",
+    "static/media/Flyer fil grilon.908bbbdf.jpg": "/static/media/Flyer fil grilon.908bbbdf.jpg",
+    "static/media/Logo.af32e1ff.svg": "/static/media/Logo.af32e1ff.svg",
+    "static/media/Onix_Circle_Full.d3d00722.stl": "/static/media/Onix_Circle_Full.d3d00722.stl",
+    "static/media/Sin-título-1_1.55a5fc47.svg": "/static/media/Sin-título-1_1.55a5fc47.svg",
+    "static/media/Sin-título-3.fbef16f0.svg": "/static/media/Sin-título-3.fbef16f0.svg",
+    "static/media/Summerfest 1  con sombra.14480529.jpg": "/static/media/Summerfest 1  con sombra.14480529.jpg",
+    "static/media/Summerfest 2 con sombra.71182aef.jpg": "/static/media/Summerfest 2 con sombra.71182aef.jpg",
+    "static/media/Summerfest 2 sin sombra.538fb026.jpg": "/static/media/Summerfest 2 sin sombra.538fb026.jpg",
+    "static/media/app.css": "/static/media/Tipopepel - Sisco.7de276aa.otf",
+    "static/media/avion.f45c777b.stl": "/static/media/avion.f45c777b.stl",
+    "static/media/png-transparent-technical-support-customer-service-computer-icons-help-desk-talking-on-phone-microph.7a6de19b.svg": "/static/media/png-transparent-technical-support-customer-service-computer-icons-help-desk-talking-on-phone-microph.7a6de19b.svg",
+    "static/media/slick-theme.css": "/static/media/slick.c94f7671.ttf",
+    "static/media/social-media-free-black-icon-logo-file-free-vector.4d769cb9.svg": "/static/media/social-media-free-black-icon-logo-file-free-vector.4d769cb9.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.8733dc53.js",
+    "static/css/2.6d2ee6ba.chunk.css",
+    "static/js/2.40c4b367.chunk.js",
+    "static/css/main.2b77f782.chunk.css",
+    "static/js/main.aa2f9087.chunk.js"
+  ]
+}

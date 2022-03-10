@@ -1,10 +1,8 @@
 import express from "express";
-import Contenedor from "../clases/ContenedorProductos.js";
 import Carro from "../services/Carrito.js";
 
 const carritoService = new Carro();
 const routerCarrito = express.Router();
-const productos = new Contenedor();
 
 //GET
 routerCarrito.get('/',(req,res)=>{

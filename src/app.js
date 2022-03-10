@@ -1,18 +1,20 @@
 import express from "express";
 import routerProducto from './route/productos.js';
 import routerCarrito from './route/carrito.js'
+import routerUsuario from "./route/usuario.js";
 import __dirname from "./utils.js";
 import cors from 'cors'
 import ProductosDB from "./services/Productos.js";
 import Chat from "./services/Chat.js";
 import { Server } from "socket.io";
-
+import { application } from "express";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
 const server = app.listen(PORT, ()=>console.log(`Servidor escuchando en el puerto: ${PORT}`));
 const prodRouter = routerProducto;
-const admin = true; //Cambiar la variable a true para las peticiones POST, PUT y DELETE
+const userRouter = routerUsuario;
+
 const io = new Server(server);
 const mensajes = new Chat();
 
@@ -33,14 +35,19 @@ app.use((err,req,res,next)=>{
 app.use((req,res,next)=>{
     let timestamp = Date.now();
     let time = new Date(timestamp);
-    console.log('Peticion hecha a las: '+time.toTimeString().split(" ")[0], req.method, req.url);
-    req.auth = admin;
+    let deDonde = `desde ip: ${req.ip}`
+    console.log('Peticion hecha a las: '+time.toTimeString().split(" ")[0], req.method, req.url, deDonde);
+    
     next();
 })
 app.use('/api/productos', prodRouter);
 app.use('/api/carrito', routerCarrito);
+app.use('/api/usuario', userRouter);
 
-app.get('/', (req,res)=>{
+
+
+
+app.get('/demoFront', (req,res)=>{
     let servicio = new ProductosDB();
     servicio.verTodosProductos().then(impresoras=>{
         
@@ -50,6 +57,8 @@ app.get('/', (req,res)=>{
         res.render('productos', objRenderizado)
     })
 })
+
+
 
 app.get('/info', (req,res)=>{
     res.send({Puerto:PORT})
