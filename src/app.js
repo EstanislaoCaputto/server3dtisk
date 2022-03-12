@@ -50,13 +50,17 @@ app.use('/api/usuario', userRouter);
 app.get('/demoFront', (req,res)=>{
     let servicio = new ProductosDB();
     servicio.verTodosProductos().then(impresoras=>{
-        
+        console.log(impresoras);
         let objRenderizado = {
             objetos: impresoras.payload
         }
         res.render('productos', objRenderizado)
     })
 })
+app.get('/formulario-de-carga', (req,res)=>{
+    res.render('upload')
+})
+
 
 
 

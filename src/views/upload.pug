@@ -1,0 +1,45 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet", href="index.css")
+        title Formulario de Carga
+    body 
+        div(class="contenedor")
+            form(class="contenedor-formulario", id="formulario") 
+                label Nombre de Producto 
+                input(type="text", class="campo-texto", id="nombre")
+                label Precio 
+                input(type="number", class="campo-texto", id="precio")
+                label ¿Hay Stock?
+                input(type="boolean", class="campo-texto", id="stock")
+                label Descripcion 
+                textarea(cols="30", rows="10",type="text", class="campo-texto", id="descripcion")
+                div(class="contenedor-img", id="contenedor-img")
+                    label Imagen 
+                    input(type="file", class="subir-img", id="imagen", multiple=true)
+                    div(class="mostraimg", id="mostraimg")
+                        img(class="mostrarImg",id='mostrarImg')
+
+                div(class="contenedor-formulario-categoria")
+                    label Categoria
+                    select("seleccion-categoria",id="categoria") 
+                        option(class="categoria") Impresora Resina
+                        
+                        option(class="categoria") Impresora FDM
+                        
+                        option(class="categoria") Filamento PLA
+                        
+                        option(class="categoria") Filamento ABS
+                        
+                        option(class="categoria") Filamento PETG
+                        
+                        option(class="categoria") Filamento OTROS
+                        
+
+                input(type="submit", value="Cargar Producto" class="btn", id="enviar")
+                button(class="btn" onClick=()=>limpiar()) Limpiar
+        
+        script(type="text/javascript" src="indexForm.js")

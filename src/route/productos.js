@@ -24,8 +24,8 @@ routerProducto.post('/', (req, res) => {
 
     let producto = req.body;
     prodService.crearProducto(producto).then(result => {
-        res.send(result)
-    })
+        res.send(console.log(producto, result))
+    }).catch(err=>console.log(err))
     // res.send({error: -1, descripcion:`la ruta: ${req.originalUrl} y el método: ${req.method}, no estan autorizados`})
 
 })

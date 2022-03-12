@@ -11,8 +11,9 @@ html(lang="en")
         div(class="contenedor")
             each imp in objetos
                 div(class="contenedor-objetos")
+                    img(src=imp.Imagen, alt="foto")
                     h3='Titulo: '+imp.Nombre
-                    p='Precio: $'+imp.PrecioNormal
+                    p='Precio: $'+imp.Precio
 
         div(class="chat")
             h2 El Chat
