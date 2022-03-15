@@ -1,10 +1,14 @@
 body {
     text-align: center;
 }
+.img{
+    width: 150px;
+    height: 150px;
+}
 
 .contenedor {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     width: 98%;
     height: 100%;
@@ -13,11 +17,12 @@ body {
 
 .contenedor-objetos{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: nowrap;
     margin: 10px;
-    width: 250px;
+    width: 90%;
     align-items: center;
-    justify-content: center;
+    justify-content:space-around;
 }
 
 .img-prod{

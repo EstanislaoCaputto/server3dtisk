@@ -1,10 +1,16 @@
 import { mariadb } from "../config.js";
+import __dirname from '../utils.js'
+import path from 'path'
+import dotenv from 'dotenv'
+dotenv.config({
+  path: path.resolve(__dirname,'../variables.env')
+})
 
 export default class Usuarios{
     constructor(){
-        mariadb.schema.hasTable('usuarios').then(resultado=>{
+        mariadb.schema.hasTable(process.env.COLLECTION_DB_USUARIO).then(resultado=>{
             if(!resultado){
-                mariadb.schema.createTable('usuarios', table=>{
+                mariadb.schema.createTable(process.env.COLLECTION_DB_USUARIO, table=>{
                     table.increments();
                     table.string('Nombre').notNullable();
                     table.string('Apellido').notNullable();
@@ -23,7 +29,7 @@ export default class Usuarios{
     }
     crearUsuario = async(usuario) =>{
         try {
-            let userId = await mariadb.table('usuarios').insert(usuario);
+            let userId = await mariadb.table(process.env.COLLECTION_DB_USUARIO).insert(usuario);
             return {status:'Exito', payload:`Usuario creado con el id: ${userId}`}
         } catch (error) {
             return{status:'Error', message:`Algo anda mal, no se creo el usuario, ${error}`}
@@ -31,7 +37,7 @@ export default class Usuarios{
     }
     verUsuarios = async () =>{
         try {
-            let usuarios = await mariadb.select().table('usuarios')
+            let usuarios = await mariadb.select().table(process.env.COLLECTION_DB_USUARIO)
             return {status:'Exito', payload:usuarios}
         } catch (error) {
             return {status:'Error', message:'Algo salio mal'}
@@ -39,7 +45,7 @@ export default class Usuarios{
     }
     verUsuarioId = async(id) =>{
         try {
-            let user = await mariadb.select().table('usuarios').where('idusuarios', id).first();
+            let user = await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('idusuarios', id).first();
             if(user){
                 return{status:'Exito', payload:user}
             }else {
@@ -51,7 +57,7 @@ export default class Usuarios{
     }
     eliminarUser = async(id) =>{
         try {
-            await mariadb.select().table('usuarios').where('id', id).first().del()
+            await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('id', id).first().del()
             return{status:'Exito', message:'Usuario eliminado'}
         } catch (error) {
             return {status:'Error', message:'Algo salio mal'}
