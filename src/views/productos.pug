@@ -8,6 +8,8 @@ html(lang="en")
         title Impresoras
     body 
         h2 Productos
+        button(class="btn", id='sesion') Crear Cuenta
+        button(class="btn", id='entrar') Iniciar Sesion
         div(class="contenedor")
             each imp in objetos
                 div(class="contenedor-objetos")
@@ -16,5 +18,4 @@ html(lang="en")
                     p='Precio: $'+imp.Precio
 
 
-        script(src="/socket.io/socket.io.js") 
-        script(type="text/javascript" src="index.js") 
+        script(src="paginicial.js") 

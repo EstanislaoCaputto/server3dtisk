@@ -10,9 +10,17 @@ html(lang="en")
         form(id='loginForm')
             h2 Login 
             label username 
-            input(name='username')
+            input(name='Nombre')
+            label last name 
+            input(name='Apellido')
             label constraseña
-            input(type="password" name='contraseña')
-            button(id='login-button') LOGIN 
+            input(type="password" name='Contraseña')
+            label email
+            input(type="text" name="Mail")
+            label edad
+            input(type="number" name="Edad")
+            label celular
+            input(type="number" name="Telefono")
+            button(id='login-button') Crear Usuario
 
         script(src="login.js") 
