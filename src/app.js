@@ -69,6 +69,9 @@ app.get('/formulario-de-carga', (req,res)=>{
 app.get('/inicioSesion', (req,res)=>{
     res.render('inicioSesion')
 })
+app.get('/login', (req,res)=>{
+    res.render('login')
+})
 
 
 
@@ -107,9 +110,7 @@ io.on('connection', async socket=>{
 // app.get('/currentUser', authMiddleware, (req,res)=>{
 //     res.send(req.user)
 // })
-// app.get('/login', (req,res)=>{
-//     res.render('login')
-// })
+
 // app.post('/login', (req,res)=>{
 //     let users = user.find(usuario=>usuario.username=== req.body.username)
 //     if(!users) return res.status(400).send({status:'error', error:'usuario no existe'})
