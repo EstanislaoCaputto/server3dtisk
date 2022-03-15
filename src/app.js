@@ -52,10 +52,8 @@ app.use('/api/usuario', userRouter);
 
 
 
-app.get('/',(req,res)=>{
-    res.render('inicio')
-})
-app.get('/demoFront', (req,res)=>{
+
+app.get('/', (req,res)=>{
     let servicio = new ProductosDB();
     servicio.verTodosProductos().then(impresoras=>{
         
