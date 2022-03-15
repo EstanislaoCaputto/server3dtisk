@@ -4,13 +4,19 @@ import routerCarrito from './route/carrito.js'
 import routerUsuario from "./route/usuario.js";
 import __dirname from "./utils.js";
 import cors from 'cors'
+import jwt from 'jsonwebtoken'
+import dotenv from 'dotenv'
+import { key } from "./key.js";
 import ProductosDB from "./services/Productos.js";
 import Chat from "./services/Chat.js";
 import { Server } from "socket.io";
-import { application } from "express";
+import path from "path";
 
+dotenv.config({
+    path: path.resolve(__dirname,'../variables.env')
+})
 const app = express();
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 8081;
 const server = app.listen(PORT, ()=>console.log(`Servidor escuchando en el puerto: ${PORT}`));
 const prodRouter = routerProducto;
 const userRouter = routerUsuario;
@@ -46,11 +52,13 @@ app.use('/api/usuario', userRouter);
 
 
 
-
+app.get('/',(req,res)=>{
+    res.render('inicio')
+})
 app.get('/demoFront', (req,res)=>{
     let servicio = new ProductosDB();
     servicio.verTodosProductos().then(impresoras=>{
-        console.log(impresoras);
+        
         let objRenderizado = {
             objetos: impresoras.payload
         }
@@ -86,6 +94,47 @@ io.on('connection', async socket=>{
     })
     
 
+})
+
+//------------------USANDO JWT-----------------//
+const user = [{
+    username:'Tano',
+    contraseña:'123',
+    mail:'correo@correo.com'
+}];
+const authMiddleware = (req,res,next) =>{
+    const authHeader = req.headers.authorization;
+    if(!authHeader || authHeader === 'null') return res.status(401).send({status:'error', error:'Token not authorization'})
+    const token = authHeader.split(' ')[1];
+    jwt.verify(token, key,(err,decoded)=>{
+        if(err) return res.status(403).send({error:'Not authorized'})
+        req.user = decoded.user;
+        next();
+    })
+}
+app.get('/currentUser', authMiddleware, (req,res)=>{
+    res.send(req.user)
+})
+app.get('/login', (req,res)=>{
+    res.render('login')
+})
+app.post('/login', (req,res)=>{
+    let users = user.find(usuario=>usuario.username=== req.body.username)
+    if(!users) return res.status(400).send({status:'error', error:'usuario no existe'})
+    if(users.password!==req.body.password) return res.status(400).send({status:'error', error:'Contraseña incorrecta'})
+    const payload = {
+        user:{
+            username:users.username,
+            mail:users.mail
+        }
+    }
+    let token = jwt.sign(payload,key,{
+        expiresIn:'24h'
+    })
+    res.send({
+        message:'logged in',
+        token:token
+    })
 })
 
 

@@ -9,7 +9,6 @@ input.addEventListener('keyup', (e)=>{
 })
 
 socket.on('mensajeLog', mensaje=>{
-    console.log(mensaje);
     let div = document.getElementById('container-chat');
     let todosMensj = mensaje.map(chat=>{
         return `<p>${chat.usuario} dice: ${chat.mensajes}</p>`

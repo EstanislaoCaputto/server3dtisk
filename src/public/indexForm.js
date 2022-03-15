@@ -8,25 +8,18 @@ let input = document.getElementById('enviar')
 let muestraImg = document.getElementById('mostrarImg')
 let formulario = document.getElementById('formulario')
 
-
+let laImagen = img.value.substr(12)
 input.addEventListener('click',(e)=>{
     e.preventDefault();
-    let producto = {
-        Nombre:nombre.value,
-        Precio:precio.value,
-        Stock:stock.value,
-        Descripcion:descripcion.value,
-        Imagen:img.value,
-        Categoria:categoria.value
-    }
+    let formData = new FormData(formulario)
+    
     fetch('http://localhost:8080/api/productos', {
         method:'POST',
-        body:JSON.stringify(producto),
-        headers:{
-            'Content-Type':'application/json; charset=utf-8'
-        }
+        body:formData
+        
     })
-    .then(console.log('enviado'))
+    .then(result=>result.json()).then(json=>console.log(json))
+    // .then(console.log('enviado'))
     .catch(err=>console.log('error'+err))
     
     
@@ -42,7 +35,6 @@ img.addEventListener('change', ()=>{
     }else if(archImg.length > 1){
         let arrayImg = []
         Array.from(archImg).forEach((element,index) => {
-            console.log(`index: ${index} y elemnt: ${element}`);
             arrayImg.push(element)
             if(index===0){
                 let elUrl = URL.createObjectURL(arrayImg[0])

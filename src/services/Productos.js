@@ -1,10 +1,17 @@
 import {mariadb} from "../config.js";
+import upload from "./uploader.js";
+import __dirname from '../utils.js'
+import path from 'path'
+import dotenv from 'dotenv'
+dotenv.config({
+  path: path.resolve(__dirname,'../variables.env')
+})
 
 class ProductosDB {
     constructor(){
-        mariadb.schema.hasTable('productos1').then(resultado=>{
+        mariadb.schema.hasTable(process.env.COLLECTION_DB_PRODUCTO).then(resultado=>{
             if(!resultado){
-                mariadb.schema.createTable('productos1', table=>{
+                mariadb.schema.createTable(process.env.COLLECTION_DB_PRODUCTO, table=>{
                     table.increments();
                     table.string('Nombre').notNullable();
                     table.string('Categorías').notNullable().defaultTo('sin Marca');
@@ -21,7 +28,7 @@ class ProductosDB {
     }
     crearProducto = async (producto) => {
         try {
-            let prodID = await mariadb.table('productos1').insert(producto);
+            let prodID = await mariadb.table(process.env.COLLECTION_DB_PRODUCTO).insert(producto);
             return{status:'Exito!', message:`Producto agregado con el ID: ${prodID}`}
         } catch (error) {
             return{status:'Error', message:'No se pudo crear el producto', error:error}
@@ -29,7 +36,7 @@ class ProductosDB {
     }
     verTodosProductos = async () => {
         try {
-            let losProductos = await mariadb.select().table('productos1');
+            let losProductos = await mariadb.select().table(process.env.COLLECTION_DB_PRODUCTO);
             return{status:'Exito', payload:losProductos}
         } catch (error) {
             return {status:'Error', message:'Algo salio mal'}
@@ -37,7 +44,7 @@ class ProductosDB {
     }
     productoPorId = async (id) =>{
         try {
-            let prod = await mariadb.select().table('productos1').where('id', id).first();
+            let prod = await mariadb.select().table(process.env.COLLECTION_DB_PRODUCTO).where('id', id).first();
             if (prod) {
                 return{status:'Exito!', payload:prod}
             } else {
@@ -49,7 +56,7 @@ class ProductosDB {
     }
     editarProductoPorId = async (id,producto) =>{
         try {
-            let prod = await mariadb.select().table('productos1').where('id', id).first().update(producto);
+            let prod = await mariadb.select().table(process.env.COLLECTION_DB_PRODUCTO).where('id', id).first().update(producto);
             if (prod) {
                 return{status:'Exito', payload:`Producto editado con éxito, ${prod}`}
             } else {
@@ -59,9 +66,16 @@ class ProductosDB {
             return {status:'Error', message:'Algo salio mal'}
         }
     }
+    eliminarTodosLosDatos = async () =>{
+        try {
+            await mariadb.select().table(process.env.COLLECTION_DB_PRODUCTO).delete()
+        } catch (error) {
+            return {status:'Error', error:error}
+        }
+    }
     eliminarProductoPorId = async (id) =>{
         try {
-            await mariadb.select().table('productos1').where('id',id).first().del();
+            await mariadb.select().table(process.env.COLLECTION_DB_PRODUCTO).where('id',id).first().del();
             return {status:'Exito!', message:'Producto eliminado'}
         } catch (error) {
             return {status:'Error', message:'Algo salio mal'}
