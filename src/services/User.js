@@ -43,6 +43,18 @@ export default class Usuarios{
             return {status:'Error', message:'Algo salio mal'}
         }
     }
+    verUsuarioNombre = async(nombre) =>{
+        try {
+            let user = await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('Nombre',nombre)
+            if(user){
+                return{status:'Exito', payload:user}
+            }else{
+                return{status:'error', message:'No se encontro el Nombre de usuario'}
+            }
+        } catch (error) {
+            return {status:'Error', message:'No existe el Usuario', error:error}
+        }
+    }
     verUsuarioId = async(id) =>{
         try {
             let user = await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('idusuarios', id).first();
@@ -57,10 +69,18 @@ export default class Usuarios{
     }
     eliminarUser = async(id) =>{
         try {
-            await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('id', id).first().del()
+            await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('idusuarios', id).first().del()
             return{status:'Exito', message:'Usuario eliminado'}
         } catch (error) {
-            return {status:'Error', message:'Algo salio mal'}
+            return {status:'Error', message:'Algo salio mal', tuError:error}
+        }
+    }
+    eliminarTodo = async()=>{
+        try {
+            await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).delete()
+            return{status:'Exito', message:'Usuarios eliminados'}
+        } catch (error) {
+            return {status:'Error', message:'Algo salio mal', error:error}
         }
     }
 

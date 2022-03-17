@@ -11,7 +11,7 @@ export const mariadb = knex({
     version: '10.4.22',
     connection: {
       host: process.env.HOST_DB,
-      port: 3306,
+      port: process.env.PORT_DB,
       user: process.env.USER_DB,
       password:process.env.PASSWORD_DB,
       database: process.env.DATABASE_NAME

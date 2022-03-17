@@ -5,7 +5,7 @@ loginButton.addEventListener('click', e=>{
     let form = document.getElementById('loginForm')
     let data = new FormData(form)
     data.forEach((value,key)=>sendObj[key]=value)
-    fetch('/login',{
+    fetch('/api/usuario/',{
         method:'POST',
         body:JSON.stringify(sendObj),
         headers:{
@@ -16,7 +16,7 @@ loginButton.addEventListener('click', e=>{
             console.log(json.error);
         }else{
             localStorage.setItem('token',`Bearer ${json.token}`)
-            location.replace('/demoFront')
+            // location.replace('/')
         }
     })
 })

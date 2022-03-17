@@ -52,10 +52,8 @@ app.use('/api/usuario', userRouter);
 
 
 
-app.get('/',(req,res)=>{
-    res.render('inicio')
-})
-app.get('/demoFront', (req,res)=>{
+
+app.get('/', (req,res)=>{
     let servicio = new ProductosDB();
     servicio.verTodosProductos().then(impresoras=>{
         
@@ -67,6 +65,12 @@ app.get('/demoFront', (req,res)=>{
 })
 app.get('/formulario-de-carga', (req,res)=>{
     res.render('upload')
+})
+app.get('/inicioSesion', (req,res)=>{
+    res.render('inicioSesion')
+})
+app.get('/login', (req,res)=>{
+    res.render('login')
 })
 
 
@@ -97,44 +101,33 @@ io.on('connection', async socket=>{
 })
 
 //------------------USANDO JWT-----------------//
-const user = [{
-    username:'Tano',
-    contraseña:'123',
-    mail:'correo@correo.com'
-}];
-const authMiddleware = (req,res,next) =>{
-    const authHeader = req.headers.authorization;
-    if(!authHeader || authHeader === 'null') return res.status(401).send({status:'error', error:'Token not authorization'})
-    const token = authHeader.split(' ')[1];
-    jwt.verify(token, key,(err,decoded)=>{
-        if(err) return res.status(403).send({error:'Not authorized'})
-        req.user = decoded.user;
-        next();
-    })
-}
-app.get('/currentUser', authMiddleware, (req,res)=>{
-    res.send(req.user)
-})
-app.get('/login', (req,res)=>{
-    res.render('login')
-})
-app.post('/login', (req,res)=>{
-    let users = user.find(usuario=>usuario.username=== req.body.username)
-    if(!users) return res.status(400).send({status:'error', error:'usuario no existe'})
-    if(users.password!==req.body.password) return res.status(400).send({status:'error', error:'Contraseña incorrecta'})
-    const payload = {
-        user:{
-            username:users.username,
-            mail:users.mail
-        }
-    }
-    let token = jwt.sign(payload,key,{
-        expiresIn:'24h'
-    })
-    res.send({
-        message:'logged in',
-        token:token
-    })
-})
+// const user = [{
+//     username:'Tano',
+//     contraseña:'123',
+//     mail:'correo@correo.com'
+// }];
+
+// app.get('/currentUser', authMiddleware, (req,res)=>{
+//     res.send(req.user)
+// })
+
+// app.post('/login', (req,res)=>{
+//     let users = user.find(usuario=>usuario.username=== req.body.username)
+//     if(!users) return res.status(400).send({status:'error', error:'usuario no existe'})
+//     if(users.password!==req.body.password) return res.status(400).send({status:'error', error:'Contraseña incorrecta'})
+//     const payload = {
+//         user:{
+//             username:users.username,
+//             mail:users.mail
+//         }
+//     }
+//     let token = jwt.sign(payload,key,{
+//         expiresIn:'24h'
+//     })
+//     res.send({
+//         message:'logged in',
+//         token:token
+//     })
+// })
 
 
