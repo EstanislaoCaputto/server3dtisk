@@ -69,10 +69,10 @@ export default class Usuarios{
     }
     eliminarUser = async(id) =>{
         try {
-            await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('id', id).first().del()
+            await mariadb.select().table(process.env.COLLECTION_DB_USUARIO).where('idusuarios', id).first().del()
             return{status:'Exito', message:'Usuario eliminado'}
         } catch (error) {
-            return {status:'Error', message:'Algo salio mal'}
+            return {status:'Error', message:'Algo salio mal', tuError:error}
         }
     }
     eliminarTodo = async()=>{

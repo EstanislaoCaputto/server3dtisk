@@ -38,9 +38,9 @@ routerUsuario.post('/registrar', async(req,res)=>{
 })
 routerUsuario.post('/', async(req,res)=>{
     let usuario = req.body
+    
     let password = await encript(usuario.Contraseña,10)
     usuario.Contraseña = password
-    console.log(usuario)
     try{
         userService.crearUsuario(usuario).then(resultado=>{
             res.send({status:'Exito', message:'Usuario agreado', payload:resultado})
@@ -55,6 +55,12 @@ routerUsuario.post('/', async(req,res)=>{
 routerUsuario.delete('/eliminar-todos-usuarios', (req,res)=>{
     userService.eliminarTodo().then(resultado=>{
         res.send(resultado)
+    })
+})
+routerUsuario.delete('/:uid',(req,res)=>{
+    let id = req.params.uid
+    userService.eliminarUser(id).then(result=>{
+        res.send(result)
     })
 })
 
