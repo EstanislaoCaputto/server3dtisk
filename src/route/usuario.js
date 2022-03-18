@@ -30,6 +30,15 @@ routerUsuario.get('/:uid', (req,res)=>{
 })
 
 //POST
+routerUsuario.post('/logear', async(req,res)=>{
+    let user = req.body
+    console.log(user);
+    userService.verUsuarioNombre(user.Nombre).then(result=>{
+        console.log(result.payload[1])
+        res.send(result.payload)
+        
+    })
+})
 routerUsuario.post('/registrar', async(req,res)=>{
     let usuario = req.body
     userService.verUsuarioNombre(usuario.Nombre).then(result=>{
